@@ -1,203 +1,100 @@
-query Listings(
-    $segment: String!,
-    $stage: String,
-    $largeImageWidth: Int!,
-    $largeImageHeight: Int!,
-    $largeImageScaleMethod: String!,
-    $mediumImageWidth: Int!,
-    $mediumImageHeight: Int!,
-    $mediumImageScaleMethod: String!,
-    $smallImageWidth: Int!,
-    $smallImageHeight: Int!,
-    $smallImageScaleMethod: String!,
-    $logoImageWidth: Int!,
-    $logoImageHeight: Int!,
-    $logoImageScaleMethod: String!,
-    $galleryImageWidth: Int!,
-    $galleryImageHeight: Int!,
-    $galleryImageScaleMethod: String!,
-) {
-    paginatedListings(segment: $segment, stage: $stage) {
-
-        edges {
+query L ($slug: String, $identifier: Int, $exclude: Int, $categories: [ID], $keywords: String, $places: [ID], $longitude: String, $latitude: String, $radius: Int, $limit: Int, $offset: Int){
+  listings (slug: $slug, identifier: $identifier, exclude: $exclude, categories: $categories, keywords: $keywords, places: $places, longitude: $longitude, latitude: $latitude, radius: $radius, limit: $limit, offset: $offset ) {
+    edges {
+      node {
+        Identifier
+        Title
+        URLSegment
+        Meta
+        MainCategory {
+          Title
+          Identifier
+        }
+        Categories {
+          edges {
             node {
-                ID
-                Name
-                URLSlug
-                MetaData {
-                  title
-                  meta_title
-                  keywords
-                  meta_description
-                  robots
-                  canonical
-                  og_locale
-                  og_type
-                  og_description
-                  og_title
-                  og_url
-                  og_site_name
-                  og_image
-                  twitter_card
-                  twitter_title
-                  twitter_description
-                  twitter_image
-                  extra_meta
-                }
-                Type
-                Website
-                Street
-                Summary
-                Description
-                AdditionalInfo
-                BookingURL
-                MinPrice
-                MaxPrice
-                PriceInfo
-                TransportInfo
-                GroupInfo
-                CustomFieldAmenities
-                Phone
-                FreePhone
-                MobilePhone
-                Email
-                Street
-                PostalAddress
-                Suburb
-                City
-                State
-                PostCode
-                CountryName
-                PostCode
-                Latitude
-                Longitude
-                MapIconPath
-                Facebook
-                Twitter
-                YoutubeChannel
-                Instagram
-                YelpURL
-                TripAdvisor
-                TripAdvisorID
-                TripAdvisorPartnerID
-                TripAdvisorURL
-                YoutubeVideoID
-                MinAge
-                GroupInfo
-                TransportInfo
-                YelpID
-                YelpWidget
-                IsHappeningNow
-                GoogleRatings
-                GooglePlacesLink
-                CurrentStartDate
-                NiceCurrentStartDate
-                NiceStartDate
-                NiceEndDate
-                NiceStartTime
-                NiceEndTime
-                EndDate
-                MondayOpening {
-                    From
-                    To
-                }
-                TuesdayOpening {
-                    From
-                    To
-                }
-                WednesdayOpening {
-                    From
-                    To
-                }
-                ThursdayOpening {
-                    From
-                    To
-                }
-                FridayOpening {
-                    From
-                    To
-                }
-                SaturdayOpening {
-                    From
-                    To
-                }
-                SundayOpening {
-                    From
-                    To
-                }
-                IsOpen
-                HoursOfOperation
-                TwentyFourSeven
-                HasOpeningHours
-                HolidayHours
-                NextOpens
-                MetaTitle
-                MetaDescription
-                OpenGraphTags
-                TwitterCardData
-                MainCategory {
-                    ID
-                    Title
-                }
-                MainImage {
-                    Title
-                    LoadingImageURL
-                    LargeImageURL(width: $largeImageWidth, height: $largeImageHeight, scaleMethod: $largeImageScaleMethod)
-                    MediumImageURL(width: $mediumImageWidth, height: $mediumImageHeight, scaleMethod: $mediumImageScaleMethod)
-                    SmallImageURL(width: $smallImageWidth, height: $smallImageHeight, scaleMethod: $smallImageScaleMethod)
-                }
-                LogoImage {
-                    Title
-                    URLForLogo(width: $logoImageWidth, height: $logoImageHeight, scaleMethod: $logoImageScaleMethod)
-                }
-                GalleryImages {
-                    edges {
-                        node {
-                            Title
-                            URLForGallery(width: $galleryImageWidth, height: $galleryImageHeight, scaleMethod: $galleryImageScaleMethod)
-                            MediumImageURL(width: $mediumImageWidth, height: $mediumImageHeight, scaleMethod: $mediumImageScaleMethod)
-                        }
-                    }
-                }
-                QualmarkLarge {
-                    Script
-                }
-                Files {
-                    ID
-                    Title
-                    AbsoluteURL
-                }
-                Occurrences {
-                    CurrentStartDateNice
-                    StartDateNice
-                    StartTimeNice
-                    EndDateNice
-                    EndTimeNice
-                }
-                FutureOccurrences {
-                    CurrentStartDateNice
-                    StartDateNice
-                    StartTimeNice
-                    EndDateNice
-                    EndTimeNice
-                    MultiDays
-                }
-                PastOccurrences {
-                    CurrentStartDateNice
-                    StartDateNice
-                    StartTimeNice
-                    EndDateNice
-                    EndTimeNice
-                    MultiDays
-                }
+              Title
+              Identifier
             }
+          }
         }
-        pageInfo {
-            hasNextPage
-            hasPreviousPage
-            totalCount
+        Tags {
+          edges {
+            node {
+              Title
+              Identifier
+            }
+          }
         }
-
+        Summary
+        Facilities
+        BestTimeToTravel
+        AgeRestrictions
+        Content
+        Phone
+        PhoneNational
+        PhoneInternational
+        MobilePhone
+        MobilePhoneNational
+        MobilePhoneInternational
+        Website
+        Email
+        BookingLink
+        Longitude
+        Latitude
+        FullAddress
+        StreetAddress
+        GoogleMapEmbedURL
+        City
+        Suburb
+        State
+        PostCode
+        Country
+        Facebook
+        Twitter
+        Instagram
+        Youtube
+        LinkedIn
+        SocialHashTag
+        TripAdvisorRating
+        IsDealAvailable
+        Deal
+        SpecialAlert
+        Shares
+        Views
+        Favs
+        Thumbs
+        SharesText
+        ViewsText
+        FavsText
+        ThumbsText
+        Logo {
+          Title
+          AbsoluteURL
+        }
+        MainImage {
+          Title
+          AbsoluteURL
+          Loading
+          Sized(width: 1500, height: 500)
+        }
+        GalleryImages {
+          edges {
+            node {
+              Title
+              AbsoluteURL
+              Loading
+              Small(width: 300, height: 300)
+              Sized(width: 900, height: 900)
+            }
+          }
+        }
+      }
     }
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      totalCount
+    }
+  }
 }
-

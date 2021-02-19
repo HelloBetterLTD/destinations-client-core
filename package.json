@@ -1,0 +1,20 @@
+{
+  "name": "destinations-client-core",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@bitbucket.org:silverstripersltd/destinations-client-core.git",
+  "author": "Priyashantha Hp <priyashantha@silverstripers.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@apollo/client": "^3.3.11",
+    "@babel/runtime": "^7.12.18",
+    "apollo-cache-inmemory": "^1.6.6",
+    "apollo-client": "^2.6.10",
+    "apollo-link": "^1.2.14",
+    "apollo-link-error": "^1.1.13",
+    "apollo-link-http": "^1.5.17",
+    "babel-runtime": "^6.26.0",
+    "graphql": "^15.5.0",
+    "graphql-tag": "^2.11.0"
+  }
+}

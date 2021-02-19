@@ -289,23 +289,8 @@ class Client
             [
                 'segment' => $urlSlug,
                 'stage' => $stage,
-                'largeImageWidth' => self::$large_image_width,
-                'largeImageHeight' => self::$large_image_height,
-                'largeImageScaleMethod' => self::$large_image_scale_method,
-                'mediumImageWidth' => self::$medium_image_width,
-                'mediumImageHeight' => self::$medium_image_height,
-                'mediumImageScaleMethod' => self::$medium_image_scale_method,
-                'smallImageWidth' => self::$small_image_width,
-                'smallImageHeight' => self::$small_image_height,
-                'smallImageScaleMethod' => self::$small_image_scale_method,
-                'logoImageWidth' => self::$logo_image_width,
-                'logoImageHeight' => self::$logo_image_height,
-                'logoImageScaleMethod' => self::$logo_image_scale_method,
-                'galleryImageWidth' => self::$gallery_image_width,
-                'galleryImageHeight' => self::$gallery_image_height,
-                'galleryImageScaleMethod' => self::$gallery_image_scale_method,
             ],
-            'paginatedListings'
+            'listings'
         );
         if ($result && !empty($result['edges'])) {
             return $parser->parse($result['edges'][0]['node']);

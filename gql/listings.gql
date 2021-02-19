@@ -1,92 +1,56 @@
-query Listings(
-    $categories: [ID],
-    $exclude_categories: [ID],
-    $places: [ID],
-    $tags: [ID],
-    $keywords: String,
-    $listingType : String,
-    $startDate : String,
-    $endDate: String,
-    $latitude : String,
-    $longitude : String,
-    $radius : Int,
-    $offset: Int,
-    $limit: Int,
-    $exclude: Int,
-    $sortBy: [PaginatedListingsSortInputType]
-    ) {
-
-    paginatedListings(
-        categories: $categories,
-        exclude_categories: $exclude_categories,
-        places: $places,
-        tags: $tags,
-        listingType: $listingType,
-        startDate: $startDate,
-        endDate: $endDate,
-        latitude : $latitude,
-        longitude : $longitude,
-        radius : $radius,
-        keywords: $keywords,
-        offset: $offset,
-        limit: $limit,
-        exclude: $exclude,
-        sortBy: $sortBy
-    ) {
-        edges {
+query L ($slug: String, $identifier: Int, $exclude: Int, $categories: [ID], $keywords: String, $places: [ID], $longitude: String, $latitude: String, $radius: Int, $dealsOnly: Boolean, $limit: Int, $offset: Int){
+  listings (slug: $slug, identifier: $identifier, exclude: $exclude, categories: $categories, keywords: $keywords, places: $places, longitude: $longitude, latitude: $latitude, radius: $radius, dealsOnly: $dealsOnly, limit: $limit, offset: $offset ) {
+    edges {
+      node {
+        Identifier
+        Title
+        URLSegment
+        Deal
+        Shares
+        Views
+        Favs
+        Thumbs
+        SharesText
+        ViewsText
+        FavsText
+        ThumbsText
+        MainCategory {
+          Identifier
+          MapIcon {
+            AbsoluteURL
+          }
+          IconURL
+        }
+        Categories {
+          edges {
             node {
-                ID
-                Name
-                LastEdited
-                Type
-                Featured
-                URLSlug
-                LimitedSummary
-                Identifier
-                MapIconPath
-                MapIconWidth
-                MapIconHeight
-                Website
-                Phone
-                Email
-                MinPrice
-                BookingURL
-                Latitude
-                Longitude
-                MultipleOccurrences
-                CurrentStartDate
-                NiceCurrentStartDate
-                NiceStartDate
-
-                Street
-                Suburb
-                City
-                Image {
-                    AbsoluteURL
-                    URLForList
-                }
-                Categories {
-                    edges {
-                        node {
-                            ID
-                            Title
-                        }
-                    }
-                }
-                FutureOccurrences {
-                    CurrentStartDateNice
-                    StartDateNice
-                    StartTimeNice
-                    EndDateNice
-                    EndTimeNice
-                    MultiDays
-                }
+              Identifier
             }
+          }
         }
-        pageInfo {
-            hasNextPage
-            hasPreviousPage
-            totalCount
+        Tags {
+          edges {
+            node {
+              Identifier
+            }
+          }
         }
+        Summary
+        Longitude
+        Latitude
+        Website
+        MainImage {
+          Title
+          AbsoluteURL
+          Loading
+          Sized(width: 320, height: 240)
+        }
+      }
     }
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      totalCount
+    }
+  }
 }
