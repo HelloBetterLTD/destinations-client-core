@@ -16,7 +16,8 @@ class DestinationsClient {
         return CategoriesGQL;
     }
 
-    constructor(gql = null, variables = {}) {
+    constructor(endpoint, gql = null, variables = {}) {
+        this.endpoint = endpoint;
         this.gql = gql;
         this.variables = variables;
     }
@@ -32,7 +33,7 @@ class DestinationsClient {
     }
 
     async getResults() {
-        const result = await client.query({
+        const result = await client(this.endpoint).query({
             query: this.gql,
             variables: this.variables,
         })
@@ -43,24 +44,26 @@ class DestinationsClient {
 
 }
 
-const httpLink = createHttpLink({ uri: "http://dev.api.taranaki.nz/api" });
+export const client = (endpoint) => {
+    const httpLink = createHttpLink({ uri: endpoint });
 
-const errorLink = onError(({ graphQLErrors, networkError }) => {
-    if (graphQLErrors)
-        graphQLErrors.forEach(({ message, locations, path }) =>
-            console.log(
-                `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-            )
-        );
-    if (networkError) console.log(`[Network error]: ${networkError}`);
-});
+    const errorLink = onError(({ graphQLErrors, networkError }) => {
+        if (graphQLErrors)
+            graphQLErrors.forEach(({ message, locations, path }) =>
+                console.log(
+                    `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+                )
+            );
+        if (networkError) console.log(`[Network error]: ${networkError}`);
+    });
 
-const link = errorLink.concat(httpLink);
+    const link = errorLink.concat(httpLink);
 
-export const client = new ApolloClient({
-    cache: new InMemoryCache(),
-    link,
-    connectToDevTools: true,
-})
+    return new ApolloClient({
+        cache: new InMemoryCache(),
+        link,
+        connectToDevTools: true,
+    })
+}
 
 export default DestinationsClient;
