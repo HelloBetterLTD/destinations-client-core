@@ -1,0 +1,28 @@
+query Categories($children: Boolean!, $id: ID, $parentIds: [ID], $type: String, $allCategories: Boolean) {
+    categories (id: $id, parentIds: $parentIds, type: $type, allCategories: $allCategories) {
+        ID
+        Title
+        ParentID
+        IsEventCategory
+        Children @include(if: $children) {
+            edges {
+                node {
+                    ID
+                    Title
+                    ParentID
+                    IsEventCategory
+                    Children {
+                        edges {
+                            node {
+                                ID
+                                Title
+                                ParentID
+                                IsEventCategory
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

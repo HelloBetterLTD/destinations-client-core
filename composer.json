@@ -1,0 +1,36 @@
+{
+    "name": "destinations/destinations-client-core",
+    "type": "library",
+    "description": "Destinations PHP Client",
+    "keywords" : [
+        "framework",
+        "destinations",
+        "destinations-client",
+        "php-client"
+    ],
+    "homepage": "http://api.discover.lk/",
+    "authors": [
+        {
+            "name": "Nivanka Fonseka",
+            "email": "nivanka@silverstripers.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0",
+        "guzzlehttp/guzzle": "^6.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.0",
+        "friendsofphp/php-cs-fixer": "^2.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "DD\\Client\\Core\\": "src/"
+        }
+    },
+    "extra": {
+        "expose": [
+            "client/dist"
+        ]
+    }
+}

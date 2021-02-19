@@ -1,0 +1,57 @@
+query Listings(
+    $keywords: String,
+    $offset: Int,
+    $limit: Int
+    ) {
+
+    fulltextListings(
+        keywords: $keywords,
+        offset: $offset,
+        limit: $limit
+    ) {
+        edges {
+            node {
+                ID
+                Name
+                Type
+                URLSlug
+                LimitedSummary
+                Identifier
+                MapIconPath
+                MapIconWidth
+                MapIconHeight
+                Website
+                Phone
+                Email
+                MinPrice
+                BookingURL
+                Latitude
+                Longitude
+                StartDate
+                NiceStartDate
+                City
+                Address
+                Image {
+                    URLForList
+                }
+                Categories {
+                    edges {
+                        node {
+                            ID
+                            Title
+                        }
+                    }
+                }
+                MainCategory {
+                    ID
+                    Title
+                }
+            }
+        }
+        pageInfo {
+            hasNextPage
+            hasPreviousPage
+            totalCount
+        }
+    }
+}

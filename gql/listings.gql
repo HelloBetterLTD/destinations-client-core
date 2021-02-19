@@ -1,0 +1,92 @@
+query Listings(
+    $categories: [ID],
+    $exclude_categories: [ID],
+    $places: [ID],
+    $tags: [ID],
+    $keywords: String,
+    $listingType : String,
+    $startDate : String,
+    $endDate: String,
+    $latitude : String,
+    $longitude : String,
+    $radius : Int,
+    $offset: Int,
+    $limit: Int,
+    $exclude: Int,
+    $sortBy: [PaginatedListingsSortInputType]
+    ) {
+
+    paginatedListings(
+        categories: $categories,
+        exclude_categories: $exclude_categories,
+        places: $places,
+        tags: $tags,
+        listingType: $listingType,
+        startDate: $startDate,
+        endDate: $endDate,
+        latitude : $latitude,
+        longitude : $longitude,
+        radius : $radius,
+        keywords: $keywords,
+        offset: $offset,
+        limit: $limit,
+        exclude: $exclude,
+        sortBy: $sortBy
+    ) {
+        edges {
+            node {
+                ID
+                Name
+                LastEdited
+                Type
+                Featured
+                URLSlug
+                LimitedSummary
+                Identifier
+                MapIconPath
+                MapIconWidth
+                MapIconHeight
+                Website
+                Phone
+                Email
+                MinPrice
+                BookingURL
+                Latitude
+                Longitude
+                MultipleOccurrences
+                CurrentStartDate
+                NiceCurrentStartDate
+                NiceStartDate
+
+                Street
+                Suburb
+                City
+                Image {
+                    AbsoluteURL
+                    URLForList
+                }
+                Categories {
+                    edges {
+                        node {
+                            ID
+                            Title
+                        }
+                    }
+                }
+                FutureOccurrences {
+                    CurrentStartDateNice
+                    StartDateNice
+                    StartTimeNice
+                    EndDateNice
+                    EndTimeNice
+                    MultiDays
+                }
+            }
+        }
+        pageInfo {
+            hasNextPage
+            hasPreviousPage
+            totalCount
+        }
+    }
+}

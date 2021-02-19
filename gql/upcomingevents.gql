@@ -1,0 +1,43 @@
+query UpcomingEvents(
+    $limit: Int
+) {
+  upcomingEvents(limit: $limit) {
+    ID
+    Name
+    Type
+    Featured
+    URLSlug
+    LimitedSummary
+    Identifier
+    MapIconPath
+    MapIconWidth
+    MapIconHeight
+    Website
+    Phone
+    Email
+    MinPrice
+    BookingURL
+    Latitude
+    Longitude
+    MultipleOccurrences
+    CurrentStartDate
+    NiceCurrentStartDate
+    NiceStartDate
+    Street
+    Suburb
+    City
+    Image {
+      URLForList
+      __typename
+    }
+    FutureOccurrences {
+      CurrentStartDateNice
+      StartDateNice
+      StartTimeNice
+      EndDateNice
+      EndTimeNice
+      MultiDays
+      __typename
+    }
+  }
+}

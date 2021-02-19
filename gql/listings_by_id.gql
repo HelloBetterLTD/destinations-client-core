@@ -1,0 +1,55 @@
+query listingsById(
+    $ids: [ID],
+    $listingType : String
+    ) {
+
+    listingsById(
+        ids: $ids
+        listingType: $listingType
+    ) {
+        ID
+        Name
+        Type
+        Featured
+        URLSlug
+        LimitedSummary
+        Identifier
+        MapIconPath
+        MapIconWidth
+        MapIconHeight
+        Website
+        Phone
+        Email
+        MinPrice
+        BookingURL
+        Latitude
+        Longitude
+        MultipleOccurrences
+        CurrentStartDate
+        NiceCurrentStartDate
+        NiceStartDate
+
+        Street
+        Suburb
+        City
+        MainImage {
+            URLForList
+        }
+        Categories {
+            edges {
+                node {
+                    ID
+                    Title
+                }
+            }
+        }
+        FutureOccurrences {
+            CurrentStartDateNice
+            StartDateNice
+            StartTimeNice
+            EndDateNice
+            EndTimeNice
+            MultiDays
+        }
+    }
+}

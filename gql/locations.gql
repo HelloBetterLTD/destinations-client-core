@@ -1,0 +1,7 @@
+query Locations($regionId: ID, $includingListings: Boolean)
+{
+    locations(regionId: $regionId, includingListings: $includingListings) {
+        ID
+        Name
+    }
+}
