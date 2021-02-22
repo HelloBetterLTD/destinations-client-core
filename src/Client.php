@@ -287,7 +287,7 @@ class Client
         $result = $this->call(
             $query,
             [
-                'segment' => $urlSlug,
+                'slug' => $urlSlug,
                 'stage' => $stage,
             ],
             'listings'
