@@ -69,7 +69,7 @@ class Client
         $this->client = $client;
     }
 
-    public function getCategories($includeChildren = false, $parentIDs = null, $allCategories = false)
+    public function getCategories($ids = null, $includeChildren = false, $parentIDs = null, $allCategories = false)
     {
         $query = QueryLoader::get_query_for(QueryLoader::CATEGORIES);
         $parser = Parser::get_parser_for(CategoryParser::class);
@@ -77,8 +77,11 @@ class Client
             'children' => $includeChildren,
             'allCategories' => $allCategories,
         ];
+        if ($ids) {
+            $vars['ids'] = $ids;
+        }
         if ($parentIDs) {
-            $vars['parentIDs'] = json_encode($parentIDs);
+            $vars['parentIDs'] = $parentIDs;
         }
 
         return $parser->parse($this->call(

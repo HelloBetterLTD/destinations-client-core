@@ -3,6 +3,7 @@ query Categories($ids: [ID]) {
     ID
     Identifier
     Title
+    IsEventCategory
     MapIcon {
       AbsoluteURL
     }
