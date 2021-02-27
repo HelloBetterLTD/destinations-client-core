@@ -4,6 +4,7 @@ query Categories($ids: [ID]) {
     Identifier
     Title
     IsEventCategory
+    IsAccommodationCategory
     MapIcon {
       AbsoluteURL
     }
