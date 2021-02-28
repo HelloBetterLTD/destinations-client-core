@@ -1,0 +1,7 @@
+query Tags($listingCategories: [ID], $filterEnabled: Boolean) {
+    tags(listingCategories: $listingCategories, filterEnabled: $filterEnabled) {
+        ID
+        Identifier
+        Title
+    }
+}

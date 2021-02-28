@@ -7,6 +7,7 @@ use Symfony\Component\Filesystem\Exception\FileNotFoundException;
 class QueryLoader
 {
 	const CATEGORIES = 'categories';
+	const TAGS = 'tags';
 	const LISTINGS = 'listings';
 	const LISTINGS_BY_ID = 'listings_by_id';
 	const REGIONS = 'regions';

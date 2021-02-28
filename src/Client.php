@@ -11,6 +11,7 @@ use DD\Client\Core\Parsers\LocationParser;
 use DD\Client\Core\Parsers\PaginatedListingsParser;
 use DD\Client\Core\Parsers\Parser;
 use DD\Client\Core\Parsers\RegionParser;
+use DD\Client\Core\Parsers\TagParser;
 use GuzzleHttp\Client as GuzzleClient;
 
 /**
@@ -105,6 +106,25 @@ class Client
             $vars,
             'categories'
         ))->first();
+    }
+
+    public function getTags($listingCategories = null, $filterEnabled = null)
+    {
+        $query = QueryLoader::get_query_for(QueryLoader::TAGS);
+        $parser = Parser::get_parser_for(TagParser::class);
+        $vars = [];
+        if ($listingCategories) {
+            $vars['listingCategories'] = $listingCategories;
+        }
+        if (!is_null($filterEnabled)) {
+            $vars['filterEnabled'] = $filterEnabled;
+        }
+
+        return $parser->parse($this->call(
+            $query,
+            $vars,
+            'tags'
+        ));
     }
 
     public function getLocations($regionID)
