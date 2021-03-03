@@ -3,6 +3,7 @@
 namespace DD\Client\Core\Parsers;
 
 use SilverStripe\ORM\FieldType\DBDatetime;
+use SilverStripe\ORM\FieldType\DBField;
 
 class ListingParser extends Parser
 {
@@ -32,6 +33,9 @@ class ListingParser extends Parser
 		    if (!empty($pathInfo['host'])) {
 		        $data['WebsiteDisplay'] = $pathInfo['host'];
             }
+		}
+		if (!empty($data['CurrentStartDate'])) {
+            $data['CurrentStartDate'] = DBField::create_field('Datetime', $data['CurrentStartDate']);
 		}
 	}
 

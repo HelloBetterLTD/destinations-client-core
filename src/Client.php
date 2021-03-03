@@ -181,7 +181,7 @@ class Client
     }
 
 
-    public function searchListings($categories = null, $tags = null, $places = null, $keywords = '', $startDate = null, $endDate = null, $offset = null, $limit = 12, $latitude = null, $longitude = null, $radius = 2000, $exclude = null, $excludeCategories = null)
+    public function searchListings($listingType= null, $categories = null, $tags = null, $places = null, $keywords = '', $startDate = null, $endDate = null, $offset = null, $limit = 12, $latitude = null, $longitude = null, $radius = 2000, $exclude = null, $excludeCategories = null)
     {
         $sortBy = [
             [
@@ -195,43 +195,45 @@ class Client
 
         $query = QueryLoader::get_query_for(QueryLoader::LISTINGS);
         $vars = [];
+        if ($listingType) {
+            $vars['listingType'] = $listingType;
+        }
         if ($categories) {
             $vars['categories'] = $categories;
         }
         if ($tags) {
             $vars['tags'] = $tags;
         }
-//        if ($places) {
-//            $vars['places'] = $places;
-//        }
-//        if ($keywords) {
-//            $vars['keywords'] = $keywords;
-//        }
-//        if ($startDate) {
-//            $vars['startDate'] = $startDate;
-//        }
-//        if ($endDate) {
-//            $vars['endDate'] = $endDate;
-//        }
-//        if ($offset) {
-//            $vars['offset'] = $offset;
-//        }
-//        if ($limit) {
-//            $vars['limit'] = $limit;
-//        }
-//        if ($exclude) {
-//            $vars['exclude'] = $exclude;
-//        }
+        if ($places) {
+            $vars['places'] = $places;
+        }
+        if ($keywords) {
+            $vars['keywords'] = $keywords;
+        }
+        if ($startDate) {
+            $vars['startDate'] = $startDate;
+        }
+        if ($endDate) {
+            $vars['endDate'] = $endDate;
+        }
+        if ($offset) {
+            $vars['offset'] = $offset;
+        }
+        if ($limit) {
+            $vars['limit'] = $limit;
+        }
+        if ($exclude) {
+            $vars['exclude'] = $exclude;
+        }
 
-//        if ($latitude && $longitude) {
-//            $vars['latitude'] = $latitude;
-//            $vars['longitude'] = $longitude;
-//            $vars['radius'] = $radius;
-//        } else {
-//			$vars['sortBy'] = $sortBy;
-//		}
+        if ($latitude && $longitude) {
+            $vars['latitude'] = $latitude;
+            $vars['longitude'] = $longitude;
+            $vars['radius'] = $radius;
+        } else {
+			$vars['sortBy'] = $sortBy;
+		}
 
-//        echo '<pre>'.print_r($vars, 2);die();
         $parser = Parser::get_parser_for(PaginatedListingsParser::class);
         return $parser->parse($this->call(
             $query,

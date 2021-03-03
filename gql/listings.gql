@@ -4,16 +4,10 @@ query L ($slug: String, $listingType: String, $startDate: String, $endDate: Stri
       node {
         Identifier
         Title
+        Type
         URLSegment
         Deal
-        Shares
-        Views
-        Favs
-        Thumbs
-        SharesText
-        ViewsText
-        FavsText
-        ThumbsText
+        CurrentStartDate
         MainCategory {
           Identifier
           Title
