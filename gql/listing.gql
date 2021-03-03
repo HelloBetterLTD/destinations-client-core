@@ -4,6 +4,7 @@ query L ($slug: String, $identifier: Int, $exclude: Int, $categories: [ID], $key
       node {
         Identifier
         Title
+        Type
         URLSegment
         Meta
         MainCategory {
@@ -43,7 +44,10 @@ query L ($slug: String, $identifier: Int, $exclude: Int, $categories: [ID], $key
         Longitude
         Latitude
         FullAddress
+        PhysicalFullAddress
+        PostalFullAddress
         StreetAddress
+        PhysicalAddressAsPostal
         GoogleMapEmbedURL
         City
         Suburb
@@ -68,6 +72,11 @@ query L ($slug: String, $identifier: Int, $exclude: Int, $categories: [ID], $key
         ViewsText
         FavsText
         ThumbsText
+        OpeningHours
+        CustomOpeningHours
+        OperatingMonths
+        MinPrice
+        MaxPrice
         Logo {
           Title
           AbsoluteURL
