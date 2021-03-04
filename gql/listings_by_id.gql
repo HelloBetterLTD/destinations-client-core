@@ -8,48 +8,28 @@ query listingsById(
         listingType: $listingType
     ) {
         ID
-        Name
+        Title
         Type
         Featured
-        URLSlug
-        LimitedSummary
+        URLSegment
         Identifier
-        MapIconPath
-        MapIconWidth
-        MapIconHeight
         Website
         Phone
         Email
         MinPrice
-        BookingURL
+        BookingLink
         Latitude
         Longitude
-        MultipleOccurrences
         CurrentStartDate
-        NiceCurrentStartDate
-        NiceStartDate
 
-        Street
-        Suburb
-        City
+        MainCategory {
+          Identifier
+          Title
+        }
         MainImage {
-            URLForList
-        }
-        Categories {
-            edges {
-                node {
-                    ID
-                    Title
-                }
-            }
-        }
-        FutureOccurrences {
-            CurrentStartDateNice
-            StartDateNice
-            StartTimeNice
-            EndDateNice
-            EndTimeNice
-            MultiDays
+            AbsoluteURL
+            Loading
+            Sized(width: 300, height: 240)
         }
     }
 }
