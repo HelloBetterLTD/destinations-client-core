@@ -17,14 +17,23 @@ query listingsById(
         Phone
         Email
         MinPrice
+        MaxPrice
         BookingLink
         Latitude
         Longitude
         CurrentStartDate
-
+        PhysicalFullAddress
         MainCategory {
           Identifier
           Title
+        }
+        Categories {
+          edges {
+            node {
+              Identifier
+              Title
+            }
+          }
         }
         MainImage {
             AbsoluteURL

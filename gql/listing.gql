@@ -10,6 +10,7 @@ query L ($slug: String, $identifier: Int, $exclude: Int, $categories: [ID], $key
         MainCategory {
           Title
           Identifier
+          ParentIdentifier
         }
         Categories {
           edges {
