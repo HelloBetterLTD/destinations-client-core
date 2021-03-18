@@ -11,6 +11,7 @@ class ListingParser extends Parser
 	{
 	    $this->processBasicData($data);
 		$this->processCategories($data);
+		$this->processTags($data);
 		$this->processGalleryImages($data);
 		$this->processImage($data);
 		$this->processMainImage($data);
@@ -44,6 +45,14 @@ class ListingParser extends Parser
 		if (!empty($data['Categories'])) {
 			$parser = Parser::get_parser_for(CategoryParser::class);
 			$data['Categories'] = $parser->parse($data['Categories']['edges']);
+		}
+	}
+
+	public function processTags(&$data)
+	{
+		if (!empty($data['Tags'])) {
+			$parser = Parser::get_parser_for(TagParser::class);
+			$data['Tags'] = $parser->parse($data['Tags']['edges']);
 		}
 	}
 
