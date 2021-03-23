@@ -3,6 +3,8 @@ query Categories($ids: [ID], $includeChildren: Boolean) {
     ID
     Identifier
     Title
+    Type
+    ParentIdentifier
     IsEventCategory
     IsAccommodationCategory
     MapIcon {
