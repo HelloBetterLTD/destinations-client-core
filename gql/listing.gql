@@ -61,6 +61,8 @@ query L ($slug: String, $identifier: Int, $exclude: Int, $categories: [ID], $key
         Youtube
         LinkedIn
         SocialHashTag
+        BookIt
+        BookitOperatorID
         TripAdvisorRating
         IsDealAvailable
         Deal
