@@ -78,6 +78,7 @@ query L ($slug: String, $identifier: Int, $exclude: Int, $categories: [ID], $key
         OperatingMonths
         MinPrice
         MaxPrice
+        ThirdpartyURL
         Logo {
           Title
           AbsoluteURL
