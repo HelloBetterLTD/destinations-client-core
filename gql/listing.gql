@@ -63,18 +63,9 @@ query L ($slug: String, $identifier: Int, $exclude: Int, $categories: [ID], $key
         SocialHashTag
         BookIt
         BookitOperatorID
-        TripAdvisorRating
         IsDealAvailable
         Deal
         SpecialAlert
-        Shares
-        Views
-        Favs
-        Thumbs
-        SharesText
-        ViewsText
-        FavsText
-        ThumbsText
         OpeningHours
         CustomOpeningHours
         OperatingMonths
