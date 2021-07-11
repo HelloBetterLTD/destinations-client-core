@@ -62,10 +62,6 @@ class Client
             throw new \InvalidArgumentException('Destinations Server endpoint not specified');
         }
 
-        if (!$referrer) {
-            throw new \InvalidArgumentException('Destinations Server referrer not specified');
-        }
-
         $client = new GuzzleClient();
         $this->client = $client;
     }
