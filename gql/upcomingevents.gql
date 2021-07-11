@@ -1,43 +1,64 @@
-query UpcomingEvents(
-    $limit: Int
-) {
-  upcomingEvents(limit: $limit) {
-    ID
-    Name
-    Type
-    Featured
-    URLSlug
-    LimitedSummary
-    Identifier
-    MapIconPath
-    MapIconWidth
-    MapIconHeight
-    Website
-    Phone
-    Email
-    MinPrice
-    BookingURL
-    Latitude
-    Longitude
-    MultipleOccurrences
-    CurrentStartDate
-    NiceCurrentStartDate
-    NiceStartDate
-    Street
-    Suburb
-    City
-    Image {
-      URLForList
-      __typename
+query E ($slug: String, $startDate: String, $endDate: String, $identifier: Int, $exclude: Int, $categories: [ID], $tags: [ID], $keywords: String, $places: [ID], $longitude: String, $latitude: String, $radius: Int, $limit: Int, $offset: Int){
+    upcomingEvents (slug: $slug, startDate: $startDate, endDate: $endDate, identifier: $identifier, exclude: $exclude, categories: $categories, tags: $tags, keywords: $keywords, places: $places, longitude: $longitude, latitude: $latitude, radius: $radius, limit: $limit, offset: $offset ) {
+        edges {
+            node {
+                Identifier
+                Title
+                Type
+                URLSegment
+                Deal
+                CurrentStartDate
+                MainCategory {
+                    Identifier
+                    Title
+                    MapIcon {
+                        AbsoluteURL
+                    }
+                    IconURL
+                }
+                Categories {
+                    edges {
+                        node {
+                            Title
+                            Identifier
+                        }
+                    }
+                }
+                Tags {
+                    edges {
+                        node {
+                            Title
+                            Identifier
+                        }
+                    }
+                }
+                Summary
+                Longitude
+                Latitude
+                Website
+                MainImage {
+                    Title
+                    AbsoluteURL
+                    Loading
+                    Sized(width: 320, height: 240)
+                }
+                CurrentPerformace {
+                    Venue
+                    StartDate
+                    EndDate
+                    FullAddress
+                    PostalFullAddress
+                    PhysicalFullAddress
+                }
+                FuturePerformances {
+                    Venue
+                    StartDate
+                    EndDate
+                    FullAddress
+                    PostalFullAddress
+                    PhysicalFullAddress
+                }
+            }
+        }
     }
-    FutureOccurrences {
-      CurrentStartDateNice
-      StartDateNice
-      StartTimeNice
-      EndDateNice
-      EndTimeNice
-      MultiDays
-      __typename
-    }
-  }
 }

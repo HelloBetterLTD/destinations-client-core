@@ -1,7 +1,18 @@
-query Locations($regionId: ID, $includingListings: Boolean)
-{
-    locations(regionId: $regionId, includingListings: $includingListings) {
+query Locations($id: ID, $ids: [ID], $parentIds: [ID], $all: Boolean) {
+    locations(id: $id, ids: $ids, parentIds: $parentIds, all: $all) {
         ID
-        Name
+        Title
+        Latitude
+        Longitude
+        Children {
+            edges {
+                node {
+                    ID
+                    Title
+                    Latitude
+                    Longitude
+                }
+            }
+        }
     }
 }

@@ -1,6 +1,5 @@
-query Tags($listingCategories: [ID], $filterEnabled: Boolean) {
-    tags(listingCategories: $listingCategories, filterEnabled: $filterEnabled) {
-        ID
+query Tags($id: ID, $filterEnabled: Boolean, $all: Boolean) {
+    tags(id: $id, filterEnabled: $filterEnabled, all: $all) {
         Identifier
         Title
     }

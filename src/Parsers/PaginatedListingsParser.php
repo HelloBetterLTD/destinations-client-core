@@ -47,4 +47,9 @@ class PaginatedListingsParser extends ListingParser
 	{
 		return $this->iterator;
 	}
+
+	public function count()
+    {
+        return $this->getTotalCount();
+    }
 }

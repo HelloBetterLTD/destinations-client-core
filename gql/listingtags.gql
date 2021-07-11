@@ -1,8 +1,0 @@
-query ListingTags($id: ID, $hasListings: Boolean, $categories: [ID]) {
-    listingtags (id: $id, hasListings: $hasListings, categories: $categories) {
-        ID
-        Title
-        URLSegment
-    }
-}
-

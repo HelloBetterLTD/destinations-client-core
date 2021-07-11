@@ -4,6 +4,7 @@ namespace DD\Client\Core;
 
 use DD\Client\Core\Parsers\CategoryParser;
 use DD\Client\Core\Parsers\EventParser;
+use DD\Client\Core\Parsers\EventsParser;
 use DD\Client\Core\Parsers\ListingParser;
 use DD\Client\Core\Parsers\ListingsParser;
 use DD\Client\Core\Parsers\ListingTagsParser;
@@ -66,19 +67,19 @@ class Client
         $this->client = $client;
     }
 
-    public function getCategories($ids = null, $includeChildren = false, $parentIDs = null, $allCategories = false)
+    public function getCategories($ids = null, $parentIds = null, $includeChildren = false, $all = false)
     {
         $query = QueryLoader::get_query_for(QueryLoader::CATEGORIES);
         $parser = Parser::get_parser_for(CategoryParser::class);
         $vars = [
             'children' => $includeChildren,
-            'allCategories' => $allCategories,
+            'all' => $all
         ];
         if ($ids) {
             $vars['ids'] = $ids;
         }
-        if ($parentIDs) {
-            $vars['parentIDs'] = $parentIDs;
+        if ($parentIds) {
+            $vars['parentIds'] = $parentIds;
         }
 
         return $parser->parse($this->call(
@@ -88,14 +89,13 @@ class Client
         ));
     }
 
-    public function getCategory($id, $includeChildren = false, $allCategories = false)
+    public function getCategory($id, $includeChildren = false)
     {
         $query = QueryLoader::get_query_for(QueryLoader::CATEGORIES);
         $parser = Parser::get_parser_for(CategoryParser::class);
         $vars = [
             'children' => $includeChildren,
-            'id' => $id,
-            'allCategories'=> $allCategories
+            'id' => $id
         ];
         return $parser->parse($this->call(
             $query,
@@ -104,13 +104,16 @@ class Client
         ))->first();
     }
 
-    public function getTags($listingCategories = null, $filterEnabled = null)
+    public function getTags($id = null, $filterEnabled = null, $all = false)
     {
         $query = QueryLoader::get_query_for(QueryLoader::TAGS);
         $parser = Parser::get_parser_for(TagParser::class);
         $vars = [];
-        if ($listingCategories) {
-            $vars['listingCategories'] = $listingCategories;
+        if ($id) {
+            $vars['id'] = $id;
+        }
+        if ($all) {
+            $vars['all'] = $all;
         }
         if (!is_null($filterEnabled)) {
             $vars['filterEnabled'] = $filterEnabled;
@@ -123,12 +126,21 @@ class Client
         ));
     }
 
-    public function getLocations($regionID)
+    public function getLocations($id = null, $ids = null, $parentIds = null, $all = null)
     {
         $query = QueryLoader::get_query_for(QueryLoader::LOCATIONS);
         $vars = [];
-        if ($regionID) {
-            $vars['regionId'] = $regionID;
+        if (!is_null($id)) {
+            $vars['id'] = $id;
+        }
+        if (!is_null($ids)) {
+            $vars['ids'] = $ids;
+        }
+        if (!is_null($parentIds)) {
+            $vars['parentIds'] = $parentIds;
+        }
+        if (!is_null($all)) {
+            $vars['all'] = $all;
         }
         $parser = Parser::get_parser_for(LocationParser::class);
         return $parser->parse($this->call(
@@ -149,35 +161,24 @@ class Client
         ));
     }
 
-    public function getListingTags()
-    {
-        $query = QueryLoader::get_query_for(QueryLoader::LISTING_TAGS);
-        $parser = Parser::get_parser_for(ListingTagsParser::class);
-        return $parser->parse($this->call(
-            $query,
-            [],
-            'listingtags'
-        ));
-    }
-
-    public function fulltextSearchListings($keywords, $offset = null, $limit = 12)
-    {
-        $query = QueryLoader::get_query_for(QueryLoader::LISTINGS_SEARCH);
-        $vars = [
-            'keywords' => $keywords,
-            'offset' => $offset,
-            'limit' => $limit
-        ];
-        $parser = Parser::get_parser_for(PaginatedListingsParser::class);
-        return $parser->parse($this->call(
-            $query,
-            $vars,
-            'fulltextListings'
-        ));
-    }
+//    public function fulltextSearchListings($keywords, $offset = null, $limit = 12)
+//    {
+//        $query = QueryLoader::get_query_for(QueryLoader::LISTINGS_SEARCH);
+//        $vars = [
+//            'keywords' => $keywords,
+//            'offset' => $offset,
+//            'limit' => $limit
+//        ];
+//        $parser = Parser::get_parser_for(PaginatedListingsParser::class);
+//        return $parser->parse($this->call(
+//            $query,
+//            $vars,
+//            'fulltextListings'
+//        ));
+//    }
 
 
-    public function searchListings($listingType= null, $categories = null, $tags = null, $places = null, $keywords = '', $startDate = null, $endDate = null, $offset = null, $limit = 12, $latitude = null, $longitude = null, $radius = 2000, $exclude = null, $excludeCategories = null)
+    public function getListings($listingType= null, $categories = null, $tags = null, $places = null, $keywords = '', $startDate = null, $endDate = null, $offset = null, $limit = 12, $latitude = null, $longitude = null, $radius = 2000, $exclude = null, $excludeCategories = null)
     {
         $sortBy = [
             [
@@ -277,7 +278,7 @@ class Client
     {
         $query = QueryLoader::get_query_for(QueryLoader::UPCOMING_EVENTS);
         $vars = ['limit' => $limit];
-        $parser = Parser::get_parser_for(EventParser::class);
+        $parser = Parser::get_parser_for(EventsParser::class);
         return $parser->parse($this->call(
             $query,
             $vars,
@@ -289,12 +290,7 @@ class Client
     {
         $query = QueryLoader::get_query_for(QueryLoader::TODAYS_EVENTS);
         $vars = ['limit' => $limit];
-        $parser = Parser::get_parser_for(EventParser::class);
-        $this->call(
-        $query,
-        $vars,
-        'todaysEvents'
-    );
+        $parser = Parser::get_parser_for(EventsParser::class);
         return $parser->parse($this->call(
             $query,
             $vars,

@@ -7,7 +7,7 @@ query listingsById(
         ids: $ids
         listingType: $listingType
     ) {
-        ID
+        Identifier
         Title
         Type
         Featured

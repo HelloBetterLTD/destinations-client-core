@@ -2,9 +2,6 @@
 
 namespace DD\Client\Core\Parsers;
 
-use SilverStripe\ORM\FieldType\DBDatetime;
-use SilverStripe\ORM\FieldType\DBField;
-
 class ListingParser extends Parser
 {
 	public function parserData($data)
@@ -36,7 +33,7 @@ class ListingParser extends Parser
             }
 		}
 		if (!empty($data['CurrentStartDate'])) {
-            $data['CurrentStartDate'] = DBField::create_field('Datetime', $data['CurrentStartDate']);
+            $data['CurrentStartDate'] = $data['CurrentStartDate'];
 		}
 	}
 
@@ -58,7 +55,7 @@ class ListingParser extends Parser
 
 	public function processGalleryImages(&$data)
 	{
-		if (!empty($data['GalleryImages'])) {
+		if (!empty($data['GalleryImages']) && !empty($data['GalleryImages']['edges'])) {
 			$images = [];
 			foreach ($data['GalleryImages']['edges'] as $image) {
 				$images[] = $image['node'];

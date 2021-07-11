@@ -1,6 +1,8 @@
 {
     regions {
-        ID
-        Name
+        Identifier
+        Title
+      	Latitude
+      	Longitude
     }
 }

@@ -1,6 +1,5 @@
 query Categories($ids: [ID], $includeChildren: Boolean) {
-  categories (ids: $ids) {
-    ID
+  categories (ids: $ids, includeChildren: $includeChildren) {
     Identifier
     Title
     Type

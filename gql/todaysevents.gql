@@ -1,57 +1,75 @@
-query TodaysEvents(
-    $limit: Int
-) {
-  todaysEvents(limit: $limit) {
-    ID
-    Name
-    Type
-    Featured
-    URLSlug
-    LimitedSummary
-    Identifier
-    MapIconPath
-    MapIconWidth
-    MapIconHeight
-    Website
-    Phone
-    Email
-    MinPrice
-    BookingURL
-    Latitude
-    Longitude
-    MultipleOccurrences
-    CurrentStartDate
-    NiceCurrentStartDate
-    NiceStartDate
-    NiceStartTime
-    NiceEndDate
-    NiceEndTime
-    StartDate
-    EndDate
-    Venue
-    Street
-    Suburb
-    City
-    Image {
-      URLForList
-      __typename
+query TodaysEvents($categoryId: ID, $limit: Int) {
+    todaysEvents(categoryId: $categoryId, limit: $limit) {
+        Identifier
+        Title
+        Type
+        Featured
+        URLSegment
+        Summary
+        Website
+        Phone
+        Email
+        MinPrice
+        BookingLink
+        Latitude
+        Longitude
+        MultipleOccurrences
+        CurrentStartDate
+        Venue
+        StreetAddress
+        Suburb
+        City
+        CurrentPerformace {
+            Venue
+            StartDate
+            EndDate
+            FullAddress
+            PostalFullAddress
+            PhysicalFullAddress
+        }
+        FuturePerformances {
+            Venue
+            StartDate
+            EndDate
+            FullAddress
+            PostalFullAddress
+            PhysicalFullAddress
+        }
+        MainImage {
+            Title
+            AbsoluteURL
+            Loading
+            Sized(width: 320, height: 240)
+        }
+        GalleryImages {
+            nodes {
+                Title
+                AbsoluteURL
+            }
+        }
+        MainCategory {
+            Identifier
+            Title
+            MapIcon {
+                AbsoluteURL
+            }
+            IconURL
+        }
+        Categories {
+            edges {
+                node {
+                    Title
+                    Identifier
+                }
+            }
+        }
+        Tags {
+            edges {
+                node {
+                    Title
+                    Identifier
+                }
+            }
+        }
     }
-    MainCategory {
-      ID
-      Title
-    }
-    LogoImage {
-      URLForList
-      __typename
-    }
-    FutureOccurrences {
-      CurrentStartDateNice
-      StartDateNice
-      StartTimeNice
-      EndDateNice
-      EndTimeNice
-      MultiDays
-      __typename
-    }
-  }
 }
