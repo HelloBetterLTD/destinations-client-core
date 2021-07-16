@@ -1,9 +1,10 @@
-query L ($slug: String, $listingType: String, $startDate: String, $endDate: String, $identifier: Int, $exclude: Int, $categories: [ID], $tags: [ID], $keywords: String, $places: [ID], $longitude: String, $latitude: String, $radius: Int, $dealsOnly: Boolean, $limit: Int, $offset: Int){
-  listings (slug: $slug, listingType: $listingType, startDate: $startDate, endDate: $endDate, identifier: $identifier, exclude: $exclude, categories: $categories, tags: $tags, keywords: $keywords, places: $places, longitude: $longitude, latitude: $latitude, radius: $radius, dealsOnly: $dealsOnly, limit: $limit, offset: $offset ) {
+query L ($slug: String, $listingType: String, $startDate: String, $endDate: String, $identifier: Int, $exclude: Int, $categories: [ID], $tags: [ID], $keywords: String, $places: [ID], $longitude: String, $latitude: String, $radius: Int, $dealsOnly: Boolean, $limit: Int, $offset: Int, $modifiedAfter: String){
+  listings (slug: $slug, listingType: $listingType, startDate: $startDate, endDate: $endDate, identifier: $identifier, exclude: $exclude, categories: $categories, tags: $tags, keywords: $keywords, places: $places, longitude: $longitude, latitude: $latitude, radius: $radius, dealsOnly: $dealsOnly, modifiedAfter: $modifiedAfter, limit: $limit, offset: $offset ) {
     edges {
       node {
         Identifier
         Title
+        ModifiedOn
         Type
         URLSegment
         Deal
