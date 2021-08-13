@@ -47,6 +47,11 @@ class Client
     const LIVE = 'Live';
     const DRAFT = 'Stage';
 
+    const ALL = 'All';
+    const LISTINGS = 'Listings';
+    const EVENTS = 'Events';
+
+
     public function __construct($key = null, $endPoint = null, $referrer = null)
     {
         if ($key) {
@@ -178,7 +183,71 @@ class Client
 //    }
 
 
-    public function getListings($listingType= null, $categories = null, $tags = null, $places = null, $keywords = '', $startDate = null, $endDate = null, $offset = null, $limit = 12, $latitude = null, $longitude = null, $radius = 2000, $exclude = null, $excludeCategories = null)
+
+    public function getEventListings($categories = null, $tags = null, $places = null, $keywords = '', $startDate = null, $endDate = null, $offset = null, $limit = 12, $latitude = null, $longitude = null, $radius = 2000, $exclude = null, $excludeCategories = null)
+    {
+        return $this->runListingsQuery(
+            self::EVENTS,
+            $categories,
+            $tags,
+            $places,
+            $keywords,
+            $startDate,
+            $endDate,
+            $offset,
+            $limit,
+            $latitude,
+            $longitude,
+            $radius,
+            $exclude,
+            $excludeCategories
+        );
+
+    }
+
+    public function getAllListings($categories = null, $tags = null, $places = null, $keywords = '', $startDate = null, $endDate = null, $offset = null, $limit = 12, $latitude = null, $longitude = null, $radius = 2000, $exclude = null, $excludeCategories = null)
+    {
+        return $this->runListingsQuery(
+            self::ALL,
+            $categories,
+            $tags,
+            $places,
+            $keywords,
+            $startDate,
+            $endDate,
+            $offset,
+            $limit,
+            $latitude,
+            $longitude,
+            $radius,
+            $exclude,
+            $excludeCategories
+        );
+
+    }
+
+    public function getListings($categories = null, $tags = null, $places = null, $keywords = '', $startDate = null, $endDate = null, $offset = null, $limit = 12, $latitude = null, $longitude = null, $radius = 2000, $exclude = null, $excludeCategories = null)
+    {
+        return $this->runListingsQuery(
+            self::LISTINGS,
+            $categories,
+            $tags,
+            $places,
+            $keywords,
+            $startDate,
+            $endDate,
+            $offset,
+            $limit,
+            $latitude,
+            $longitude,
+            $radius,
+            $exclude,
+            $excludeCategories
+        );
+
+    }
+
+    public function runListingsQuery($listingType = self::LISTINGS, $categories = null, $tags = null, $places = null, $keywords = '', $startDate = null, $endDate = null, $offset = null, $limit = 12, $latitude = null, $longitude = null, $radius = 2000, $exclude = null, $excludeCategories = null)
     {
         $sortBy = [
             [
@@ -186,9 +255,6 @@ class Client
                 'direction' => 'ASC'
             ]
         ];
-
-        $categories = $categories;
-        $places = $places;
 
         $query = QueryLoader::get_query_for(QueryLoader::LISTINGS);
         $vars = [];
@@ -228,8 +294,8 @@ class Client
             $vars['longitude'] = $longitude;
             $vars['radius'] = $radius;
         } else {
-			$vars['sortBy'] = $sortBy;
-		}
+            $vars['sortBy'] = $sortBy;
+        }
 
         $parser = Parser::get_parser_for(PaginatedListingsParser::class);
         return $parser->parse($this->call(
